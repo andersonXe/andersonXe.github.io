@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
 const WHATSAPP_LINK =
-  "https://wa.me/5500000000000?text=Ol%C3%A1%2C%20Anderson%21%20Quero%20uma%20landing%20page.";
+  "https://wa.me/5531991910629?text=Ol%C3%A1%2C%20Anderson%21%20Quero%20uma%20landing%20page.";
 
 function WhatsAppButton({
   children,
