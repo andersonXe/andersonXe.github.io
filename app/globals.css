@@ -1,14 +1,45 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-accent: #d4521a;
-  --color-accent-hover: #b8431399;
   --color-bg: #0d0d0d;
-  --color-surface: #1a1a1a;
-  --color-surface-2: #222222;
+  --color-surface: #141414;
+  --color-surface-2: #1c1c1c;
+  --color-line: #262626;
+  --color-line-2: #333333;
   --color-text: #f0f0f0;
-  --color-muted: #888888;
+  --color-text-2: #b8b8b8;
+  --color-muted: #6a6a6a;
+  --color-accent: #d4521a;
+  --color-accent-soft: #f3a26a;
   --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-instrument-serif);
+}
+
+:root {
+  --accent-glow: rgba(212, 82, 26, 0.35);
+  --grid: rgba(255, 255, 255, 0.035);
+  --shell-pad: clamp(20px, 4vw, 56px);
+  --transition: 220ms cubic-bezier(0.32, 0.72, 0.27, 1);
+}
+
+[data-theme="light"] {
+  --color-bg: #f4f1ec;
+  --color-surface: #ffffff;
+  --color-surface-2: #ebe7e0;
+  --color-line: #d9d4ca;
+  --color-line-2: #b9b3a6;
+  --color-text: #161412;
+  --color-text-2: #4a4742;
+  --color-muted: #8a857c;
+  --color-accent: #c9461a;
+  --color-accent-soft: #c9461a;
+  --accent-glow: rgba(201, 70, 26, 0.22);
+  --grid: rgba(0, 0, 0, 0.04);
+}
+
+* {
+  box-sizing: border-box;
 }
 
 html {
@@ -19,4 +50,163 @@ body {
   background: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-geist-sans), Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "ss01", "cv11";
+  letter-spacing: -0.011em;
+  overflow-x: hidden;
+  transition: background var(--transition), color var(--transition);
+}
+
+::selection {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+/* Theme radial reveal flash */
+.theme-flash {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background: var(--color-bg);
+  opacity: 0;
+  clip-path: circle(0% at var(--ox, 50%) var(--oy, 50%));
+}
+.theme-flash.run {
+  animation:
+    themeRevealClip 600ms cubic-bezier(0.4, 0, 0.2, 1) forwards,
+    themeRevealFade 600ms linear forwards;
+}
+
+/* Background mesh blobs */
+.bg-fx {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.bg-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  /* translate is a standalone CSS property — composes with transform without conflict */
+  translate: var(--sx, 0px) var(--sy, 0px);
+  will-change: transform, translate;
+}
+.bg-blob-1 {
+  width: 70vmax;
+  height: 70vmax;
+  background: radial-gradient(circle, var(--color-accent) 0%, transparent 60%);
+  top: -8vmax;
+  left: -8vmax;
+  opacity: 0.55;
+  animation: drift1 28s ease-in-out infinite alternate;
+}
+.bg-blob-2 {
+  width: 65vmax;
+  height: 65vmax;
+  background: radial-gradient(circle, #2a1a0e 0%, transparent 70%);
+  bottom: -20vmax;
+  right: -15vmax;
+  opacity: 0.7;
+  animation: drift2 36s ease-in-out infinite alternate;
+}
+[data-theme="light"] .bg-blob-1 { opacity: 0.18; }
+[data-theme="light"] .bg-blob-2 {
+  opacity: 0.12;
+  background: radial-gradient(circle, #c9461a 0%, transparent 70%);
+}
+
+/* Grain overlay */
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.5'/></svg>");
+}
+
+/* Reveal on scroll */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 700ms ease, transform 700ms cubic-bezier(0.32, 0.72, 0.27, 1);
+}
+[data-reveal].in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Pulse dot animation */
+@keyframes pulse {
+  0% { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+/* Rotating ring */
+@keyframes rotateRing {
+  to { transform: rotate(360deg); }
+}
+
+/* Marquee scroll */
+@keyframes scroll {
+  to { transform: translateX(-50%); }
+}
+
+/* Mesh drift */
+@keyframes drift1 {
+  to { transform: translate(20vmax, 10vmax) scale(1.15); }
+}
+@keyframes drift2 {
+  to { transform: translate(-15vmax, -8vmax) scale(0.9); }
+}
+
+/* Theme reveal — clip expands then holds; opacity rises then falls */
+@keyframes themeRevealClip {
+  from { clip-path: circle(0% at var(--ox, 50%) var(--oy, 50%)); }
+  60%, to { clip-path: circle(160% at var(--ox, 50%) var(--oy, 50%)); }
+}
+@keyframes themeRevealFade {
+  0%   { opacity: 0; }
+  55%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* Blink cursor */
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* Shared section-head two-column layout — collapses on mobile */
+@media (max-width: 860px) {
+  .section-head-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .bg-blob-1,
+  .bg-blob-2 {
+    animation: none;
+  }
+  .marquee-track {
+    animation: none;
+  }
+  .ring {
+    animation: none;
+  }
+  .pulse::after {
+    animation: none;
+  }
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
