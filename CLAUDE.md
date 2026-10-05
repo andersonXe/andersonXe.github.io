@@ -33,4 +33,4 @@ Projects shown on the page are data in `app/data/projects.ts` — add or edit en
 
 GitHub Pages via `.github/workflows/deploy.yml` — pushing to `main` builds the static export (`out/`) and publishes it. `next.config.ts` uses `output: "export"`, so server-only features (headers, rewrites, image optimization, API routes) are unavailable.
 
-The site is served under `/<repo>`; the workflow passes it as `NEXT_PUBLIC_BASE_PATH`. Asset paths used outside `next/link` (e.g. `<Image src>`) must be prefixed with it manually.
+The repo is `andersonXe.github.io`, so the site is served at the root (https://andersonxe.github.io/). The workflow still passes the Pages base path as `NEXT_PUBLIC_BASE_PATH` (empty today); asset paths used outside `next/link` (e.g. `<Image src>`) are prefixed with it so a rename to a project repo keeps working.
