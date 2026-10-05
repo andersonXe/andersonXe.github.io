@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Landing page built with Next.js 16 (App Router), TypeScript, and Tailwind CSS v4. Deployed on Vercel.
+Personal portfolio built with Next.js 16 (App Router), TypeScript, and Tailwind CSS v4. Statically exported and deployed to GitHub Pages.
 
 ## Common Commands
 
@@ -25,8 +25,12 @@ npm run lint    # ESLint
 
 ## Architecture
 
-All routes live under `app/`. The entry point is `app/page.tsx` (the landing page itself). `app/layout.tsx` is the root layout wrapping the entire app.
+All routes live under `app/`. The entry point is `app/page.tsx`. `app/layout.tsx` is the root layout wrapping the entire app.
+
+Projects shown on the page are data in `app/data/projects.ts` — add or edit entries there. Each project shows a screenshot from `public/projects/` (16:10 WebP, ~1600px wide).
 
 ## Deployment
 
-Vercel — pushing to `main` triggers automatic production deployment. All other branches get preview deployments.
+GitHub Pages via `.github/workflows/deploy.yml` — pushing to `main` builds the static export (`out/`) and publishes it. `next.config.ts` uses `output: "export"`, so server-only features (headers, rewrites, image optimization, API routes) are unavailable.
+
+The site is served under `/<repo>`; the workflow passes it as `NEXT_PUBLIC_BASE_PATH`. Asset paths used outside `next/link` (e.g. `<Image src>`) must be prefixed with it manually.

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -14,30 +14,22 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
-const instrumentSerif = Instrument_Serif({
-  variable: "--font-instrument-serif",
-  subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
-  display: "swap",
-});
-
 export const metadata: Metadata = {
-  title: "Anderson Martins — Landing pages que convertem",
+  title: "Anderson Martins — Dev fullstack",
   description:
-    "Dev fullstack especializado em landing pages rápidas, escaláveis e orientadas à conversão. Lighthouse 95+, SEO técnico, integração com seu CRM.",
+    "Anderson Martins, desenvolvedor fullstack. Projetos que resolvem problemas reais: Conformind, Craque a Craque, Escandir, Afeto em Cesta e Estimador de Salário Dev.",
   openGraph: {
-    title: "Anderson Martins — Landing pages que convertem",
+    title: "Anderson Martins — Dev fullstack",
     description:
-      "Dev fullstack especializado em landing pages rápidas, escaláveis e orientadas à conversão. Lighthouse 95+, SEO técnico, integração com seu CRM.",
+      "Anderson Martins, desenvolvedor fullstack. Projetos que resolvem problemas reais: Conformind, Craque a Craque, Escandir, Afeto em Cesta e Estimador de Salário Dev.",
     type: "website",
     locale: "pt_BR",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Anderson Martins — Landing pages que convertem",
+    title: "Anderson Martins — Dev fullstack",
     description:
-      "Dev fullstack especializado em landing pages rápidas, escaláveis e orientadas à conversão. Lighthouse 95+, SEO técnico, integração com seu CRM.",
+      "Anderson Martins, desenvolvedor fullstack. Projetos que resolvem problemas reais: Conformind, Craque a Craque, Escandir, Afeto em Cesta e Estimador de Salário Dev.",
   },
   robots: { index: true, follow: true },
 };
@@ -51,8 +43,17 @@ export default function RootLayout({
     <html
       lang="pt-BR"
       data-theme="dark"
-      className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} scroll-smooth`}
+      className={`${geistSans.variable} ${geistMono.variable} scroll-smooth`}
+      suppressHydrationWarning
     >
+      <head>
+        {/* Apply the saved theme before first paint so there's no dark→light flash */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}`,
+          }}
+        />
+      </head>
       <body className="antialiased">{children}</body>
     </html>
   );

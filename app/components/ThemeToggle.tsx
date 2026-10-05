@@ -1,42 +1,36 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
+
+type Theme = "dark" | "light";
+
+// The <html data-theme> attribute (set pre-paint in layout) is the source of truth.
+function subscribe(cb: () => void) {
+  const mo = new MutationObserver(cb);
+  mo.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+  return () => mo.disconnect();
+}
+const getTheme = (): Theme =>
+  document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
-
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem("theme") as "dark" | "light" | null;
-      if (saved) {
-        setTheme(saved);
-        document.documentElement.setAttribute("data-theme", saved);
-      }
-    } catch {}
-  }, []);
+  const theme = useSyncExternalStore(subscribe, getTheme, (): Theme => "dark");
 
   function toggle(e: React.MouseEvent<HTMLButtonElement>) {
     const next = theme === "dark" ? "light" : "dark";
-    const flash = document.getElementById("theme-flash");
-    const btn = e.currentTarget;
-    const r = btn.getBoundingClientRect();
-
-    // Theme changes immediately; flash bg auto-resolves to new --color-bg
     document.documentElement.setAttribute("data-theme", next);
     try { localStorage.setItem("theme", next); } catch {}
-    setTheme(next);
 
+    // Radial reveal from the button; the flash layer's bg already resolves to the new theme
+    const flash = document.getElementById("theme-flash");
     if (!flash) return;
+    const r = e.currentTarget.getBoundingClientRect();
     flash.style.setProperty("--ox", `${r.left + r.width / 2}px`);
     flash.style.setProperty("--oy", `${r.top + r.height / 2}px`);
     flash.classList.remove("run");
     void flash.offsetWidth;
     flash.classList.add("run");
-    const onEnd = () => {
-      flash.classList.remove("run");
-      flash.removeEventListener("animationend", onEnd);
-    };
-    flash.addEventListener("animationend", onEnd);
+    flash.addEventListener("animationend", () => flash.classList.remove("run"), { once: true });
   }
 
   return (
@@ -44,25 +38,18 @@ export default function ThemeToggle() {
       onClick={toggle}
       aria-label="Alternar tema"
       style={{
-        width: 36,
-        height: 36,
-        borderRadius: "50%",
+        width: 32,
+        height: 32,
+        borderRadius: 6,
         border: "1px solid var(--color-line)",
-        background: "var(--color-surface)",
-        color: "var(--color-text)",
+        background: "transparent",
+        color: "var(--color-text-2)",
         cursor: "pointer",
         display: "inline-flex",
         alignItems: "center",
         justifyContent: "center",
-        transition: "border-color var(--transition)",
         flexShrink: 0,
       }}
-      onMouseEnter={(e) =>
-        (e.currentTarget.style.borderColor = "var(--color-accent)")
-      }
-      onMouseLeave={(e) =>
-        (e.currentTarget.style.borderColor = "var(--color-line)")
-      }
     >
       {theme === "dark" ? (
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">

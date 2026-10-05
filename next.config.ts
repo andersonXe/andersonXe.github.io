@@ -1,20 +1,14 @@
 import type { NextConfig } from "next";
 
+// GitHub Pages serves a project repo under /<repo>. The deploy workflow passes
+// the right prefix; locally it stays empty so `npm run dev` works at the root.
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 const nextConfig: NextConfig = {
-  headers: async () => [
-    {
-      source: "/(.*)",
-      headers: [
-        { key: "X-Content-Type-Options", value: "nosniff" },
-        { key: "X-Frame-Options", value: "DENY" },
-        { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
-        {
-          key: "Permissions-Policy",
-          value: "camera=(), microphone=(), geolocation=()",
-        },
-      ],
-    },
-  ],
+  output: "export",
+  basePath,
+  trailingSlash: true,
+  images: { unoptimized: true },
 };
 
 export default nextConfig;

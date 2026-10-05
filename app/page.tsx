@@ -1,11 +1,9 @@
 import BackgroundFX from "./components/BackgroundFX";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import Differentiators from "./components/Differentiators";
-import LiveMockup from "./components/LiveMockup";
-import Process from "./components/Process";
-import Pricing from "./components/Pricing";
-import CTAFinal from "./components/CTAFinal";
+import Projects from "./components/Projects";
+import About from "./components/About";
+import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 
 export default function Home() {
@@ -15,11 +13,9 @@ export default function Home() {
       <Navbar />
       <main style={{ position: "relative", zIndex: 2 }}>
         <Hero />
-        <Differentiators />
-        <LiveMockup />
-        <Process />
-        <Pricing />
-        <CTAFinal />
+        <Projects />
+        <About />
+        <Contact />
       </main>
       <Footer />
     </>
