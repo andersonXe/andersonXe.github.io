@@ -15,10 +15,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  // absolute URLs for the share preview (og:image / twitter:image)
+  metadataBase: new URL("https://andersonxe.github.io"),
   title: "Anderson Martins · Engenheiro de software",
   description:
     "Anderson Martins, engenheiro de software. Projetos que resolvem problemas reais: Conformind, Craque a Craque, Escandir, Afeto em Cesta e Estimador de Salário Dev.",
   openGraph: {
+    url: "/",
     title: "Anderson Martins · Engenheiro de software",
     description:
       "Anderson Martins, engenheiro de software. Projetos que resolvem problemas reais: Conformind, Craque a Craque, Escandir, Afeto em Cesta e Estimador de Salário Dev.",
