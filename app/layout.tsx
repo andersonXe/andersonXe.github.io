@@ -15,21 +15,21 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Anderson Martins — Dev fullstack",
+  title: "Anderson Martins · Engenheiro de software",
   description:
-    "Anderson Martins, desenvolvedor fullstack. Projetos que resolvem problemas reais: Conformind, Craque a Craque, Escandir, Afeto em Cesta e Estimador de Salário Dev.",
+    "Anderson Martins, engenheiro de software. Projetos que resolvem problemas reais: Conformind, Craque a Craque, Escandir, Afeto em Cesta e Estimador de Salário Dev.",
   openGraph: {
-    title: "Anderson Martins — Dev fullstack",
+    title: "Anderson Martins · Engenheiro de software",
     description:
-      "Anderson Martins, desenvolvedor fullstack. Projetos que resolvem problemas reais: Conformind, Craque a Craque, Escandir, Afeto em Cesta e Estimador de Salário Dev.",
+      "Anderson Martins, engenheiro de software. Projetos que resolvem problemas reais: Conformind, Craque a Craque, Escandir, Afeto em Cesta e Estimador de Salário Dev.",
     type: "website",
     locale: "pt_BR",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Anderson Martins — Dev fullstack",
+    title: "Anderson Martins · Engenheiro de software",
     description:
-      "Anderson Martins, desenvolvedor fullstack. Projetos que resolvem problemas reais: Conformind, Craque a Craque, Escandir, Afeto em Cesta e Estimador de Salário Dev.",
+      "Anderson Martins, engenheiro de software. Projetos que resolvem problemas reais: Conformind, Craque a Craque, Escandir, Afeto em Cesta e Estimador de Salário Dev.",
   },
   robots: { index: true, follow: true },
 };

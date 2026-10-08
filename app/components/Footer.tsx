@@ -5,7 +5,9 @@ export default function Footer() {
         className="shell"
         style={{ fontSize: 13, color: "var(--color-muted)" }}
       >
-        <span>© {new Date().getFullYear()} Anderson Martins</span>
+        <span>
+          © {new Date().getFullYear()} Anderson Martins<span style={{ color: "var(--color-accent)" }}>.</span>
+        </span>
       </div>
     </footer>
   );

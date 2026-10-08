@@ -25,22 +25,12 @@ export default function Navbar() {
         .nav-link { color: var(--color-text-2); text-decoration: none; font-size: 14px; transition: color var(--transition); }
         .nav-link:hover { color: var(--color-text); }
         @media (max-width: 520px) { .nav-links { display: none !important; } }
+        .nav-brand { transition: opacity 400ms var(--ease); }
+        html.mast-compact .nav-brand { opacity: 0; pointer-events: none; }
       `}</style>
       <div className="shell" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: 60 }}>
-        <a href="#top" style={{ fontWeight: 600, fontSize: 15, color: "var(--color-text)", textDecoration: "none" }}>
-          Anderson Martins
-          <span
-            aria-hidden="true"
-            style={{
-              display: "inline-block",
-              width: 6,
-              height: 6,
-              marginLeft: 3,
-              borderRadius: "50%",
-              background: "var(--color-accent)",
-              boxShadow: "0 0 12px var(--accent-glow)",
-            }}
-          />
+        <a href="#top" className="nav-brand" style={{ fontWeight: 600, fontSize: 15, color: "var(--color-text)", textDecoration: "none" }}>
+          Anderson Martins<span style={{ color: "var(--color-accent)" }}>.</span>
         </a>
         <nav aria-label="Principal" style={{ display: "flex", alignItems: "center", gap: 24 }}>
           <div className="nav-links" style={{ display: "flex", gap: 24 }}>

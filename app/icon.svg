@@ -1,6 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <!-- cut the strokes flat at the baseline and at the apex, like Geist's A -->
+    <clipPath id="a"><rect x="0" y="14" width="64" height="35.5"/></clipPath>
+  </defs>
   <rect width="64" height="64" rx="14" fill="#0b0b0c"/>
-  <path d="M14 49 29 15 44 49" fill="none" stroke="#f2f2f3" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M20.5 37.5h17" fill="none" stroke="#f2f2f3" stroke-width="5.5" stroke-linecap="round"/>
-  <circle cx="52" cy="47" r="5" fill="#ff5a1f"/>
+  <g clip-path="url(#a)" fill="none" stroke="#f2f2f3" stroke-linejoin="miter" stroke-miterlimit="10">
+    <path d="M11.4 56 29 12.2 46.6 56" stroke-width="6.5"/>
+    <path d="M17 38.5h24" stroke-width="5"/>
+  </g>
+  <rect x="47" y="40" width="9.5" height="9.5" fill="#ff5a1f"/>
 </svg>

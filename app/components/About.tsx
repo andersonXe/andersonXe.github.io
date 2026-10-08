@@ -5,16 +5,16 @@ export default function About() {
         <h2 className="section-label">Sobre</h2>
         <div style={{ maxWidth: 720, display: "flex", flexDirection: "column", gap: 20 }}>
           <p style={{ fontSize: "clamp(20px, 2.4vw, 26px)", lineHeight: 1.4, letterSpacing: "-0.02em" }}>
-            Gosto de desafios que geram valor real. A tecnologia é só a ferramenta — o valor está em resolver problemas
-            de verdade.
+            Gosto de desafios que geram valor real. A tecnologia é só a ferramenta; o valor está em resolver problemas de
+            verdade.
           </p>
           <p style={{ fontSize: 17, lineHeight: 1.65, color: "var(--color-text-2)" }}>
-            Por isso começo pelo problema: entender quem vai usar, o que atrapalha o dia a dia dessa pessoa e o que
-            precisa ser verdade para a solução funcionar. Só depois escolho como construir.
+            Por isso começo pelo problema: entender quem vai usar, o que atrapalha o dia a dia dessa pessoa e o que a
+            solução precisa garantir para funcionar. Só depois escolho como construir.
           </p>
           <p style={{ fontSize: 17, lineHeight: 1.65, color: "var(--color-text-2)" }}>
-            E levo até o fim: da primeira conversa até o sistema no ar — sendo honesto, inclusive, sobre o que ele ainda
-            não resolve.
+            E levo o trabalho até o fim, da primeira conversa ao sistema no ar, deixando claro também o que ele ainda não
+            resolve.
           </p>
         </div>
       </div>
