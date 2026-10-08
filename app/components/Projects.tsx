@@ -5,12 +5,29 @@ import ProjectMotion from "./ProjectMotion";
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
 
+function ProjectTitle({ p }: { p: Project }) {
+  return (
+    <>
+      <p className="proj-meta">
+        {p.category} · {p.year}
+        {p.status !== "no ar" && <span className="proj-wip"> · {p.status}</span>}
+      </p>
+      <h3>{p.name}</h3>
+    </>
+  );
+}
+
 function ProjectRow({ p, index }: { p: Project; index: number }) {
   const edge = index === 0 ? "first" : index === projects.length - 1 ? "last" : undefined;
   return (
     <article className="proj" id={`projeto-${p.slug}`} data-index={index} data-edge={edge}>
       <div className="proj-stage">
         <div className="shell proj-grid">
+          {/* phones: title above the screenshot */}
+          <div className="proj-title proj-title-top" data-reveal>
+            <ProjectTitle p={p} />
+          </div>
+
           {p.image && (
             <figure className="proj-figure" data-reveal>
               <a
@@ -35,11 +52,9 @@ function ProjectRow({ p, index }: { p: Project; index: number }) {
           )}
 
           <div className="proj-body" data-reveal style={d(140)}>
-            <p className="proj-meta">
-              {p.category} · {p.year}
-              {p.status !== "no ar" && <span className="proj-wip"> · {p.status}</span>}
-            </p>
-            <h3>{p.name}</h3>
+            <div className="proj-title proj-title-side">
+              <ProjectTitle p={p} />
+            </div>
             <p className="proj-problem">{p.problem}</p>
             <ul className="proj-highlights">
               {p.highlights.map((h) => (
@@ -108,6 +123,8 @@ export default function Projects() {
         .proj-figure figcaption { margin-top: 10px; font-size: 12px; color: var(--color-muted); }
 
         .proj-body { display: flex; flex-direction: column; gap: 14px; }
+        .proj-title { display: flex; flex-direction: column; gap: 14px; }
+        .proj-title-top { display: none; }
         .proj-meta { font-family: var(--font-geist-mono); font-size: 12px; color: var(--color-muted); }
         .proj-wip { color: var(--color-accent); }
         .proj h3 { font-size: clamp(26px, 2.6vw, 34px); line-height: 1.1; letter-spacing: -0.03em; font-weight: 600; }
@@ -196,6 +213,8 @@ export default function Projects() {
 
         @media (max-width: 900px) {
           .proj-grid { grid-template-columns: 1fr; gap: 28px; align-items: start; }
+          .proj-title-top { display: flex; gap: 10px; margin-bottom: -10px; }
+          .proj-title-side { display: none; }
         }
       `}</style>
       <ProjectMotion />
