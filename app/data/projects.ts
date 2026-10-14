@@ -51,6 +51,41 @@ export const projects: Project[] = [
     image: "/projects/craque.webp",
   },
   {
+    slug: "karaoke",
+    name: "Karaokê",
+    category: "App web · Festas",
+    year: 2026,
+    status: "no ar",
+    problem:
+      "Um karaokê para reunir os amigos: a TV vira o palco e cada convidado participa pelo próprio celular, sem instalar nada.",
+    highlights: [
+      "Cada palco abre uma sala; os convidados entram pelo QR code, pedem músicas, acompanham a fila e votam em quem cantou",
+      "O celular de quem canta vira o microfone e mede a afinação nota a nota",
+      "Outras telas, na mesma casa ou à distância, tocam a música em sincronia, e a voz de quem canta chega até elas",
+      "Toca vídeos do YouTube e músicas com letra sincronizada, inclusive as geradas pelo wave2karaoke",
+    ],
+    live: "https://karaoke-cqt9.onrender.com/",
+    image: "/projects/karaoke.webp",
+    repo: `${GH}/karaoke`,
+  },
+  {
+    slug: "wave2karaoke",
+    name: "wave2karaoke",
+    category: "Ferramenta · Áudio",
+    year: 2026,
+    status: "em desenvolvimento",
+    problem:
+      "Para cantar com pontuação, o karaokê precisa de um arquivo com a letra sincronizada e a nota de cada sílaba, e montar isso à mão é um trabalho lento. O wave2karaoke gera tudo a partir de uma gravação: letra, notas, instrumental e voz-guia.",
+    highlights: [
+      "Separa a voz do instrumental, transcreve a letra e encontra a nota de cada sílaba",
+      "Testado em 16 músicas brasileiras: o cantor original tiraria em média 88% de nota com as notas geradas, contra 55% com as da ferramenta de base",
+      "Leva a letra da gravação original para vídeos de karaokê, mesmo quando estão em outro tom ou andamento",
+      "O arquivo gerado serve para o Karaokê e para qualquer jogo compatível com UltraStar",
+    ],
+    image: "/projects/wave2karaoke.webp",
+    imageNote: "Ilustração",
+  },
+  {
     slug: "escandir",
     name: "Escandir",
     category: "Editor · Poesia",
