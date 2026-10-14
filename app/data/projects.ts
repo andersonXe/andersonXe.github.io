@@ -66,7 +66,6 @@ export const projects: Project[] = [
     ],
     live: "https://karaoke-cqt9.onrender.com/",
     image: "/projects/karaoke.webp",
-    repo: `${GH}/karaoke`,
   },
   {
     slug: "wave2karaoke",
