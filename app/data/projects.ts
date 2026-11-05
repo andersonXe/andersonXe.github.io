@@ -85,6 +85,38 @@ export const projects: Project[] = [
     imageNote: "Ilustração",
   },
   {
+    slug: "repertorio",
+    name: "Repertório",
+    category: "App · Música",
+    year: 2026,
+    status: "em desenvolvimento",
+    problem:
+      "Bandas organizam ensaios e shows entre grupos de mensagem, planilhas e pastas de cifras. O Repertório junta agenda, repertórios, músicas e conversa da banda num app só, para web, Android e iPhone.",
+    highlights: [
+      "Repertórios em blocos, com o tempo total do show calculado, intervalos incluídos",
+      "Cifras que mudam de tom na hora e um modo palco com letra grande e a próxima música sempre à vista",
+      "Cada evento tem presença confirmada, repertório e chat; músicos convidados veem só aquele show",
+      "Dá para baixar o repertório antes e tocar no palco sem internet",
+    ],
+    image: "/projects/repertorio.webp",
+  },
+  {
+    slug: "pianopedals",
+    name: "pianoPedals",
+    category: "Áudio · Instrumentos",
+    year: 2026,
+    status: "em desenvolvimento",
+    problem:
+      "Os pedais do piano mudam como as notas soam, e violão e guitarra não têm nada parecido. O pianoPedals leva o sustain, o sostenuto e o una corda para outros instrumentos, com cordas virtuais que respondem ao som do próprio instrumento.",
+    highlights: [
+      "Os três pedais do piano, com meio-pedal contínuo em vez de liga e desliga",
+      "Uma rede neural reconhece quais notas estão soando, para o sostenuto segurar só essas; por enquanto, testada em violão sintético",
+      "Processa o áudio mais de 200 vezes mais rápido que o tempo real no PC, pensando em rodar depois dentro de um pedal",
+    ],
+    image: "/projects/pianopedals.webp",
+    imageNote: "Espectrograma gerado pelo próprio projeto",
+  },
+  {
     slug: "escandir",
     name: "Escandir",
     category: "Editor · Poesia",

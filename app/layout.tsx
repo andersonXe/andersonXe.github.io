@@ -19,12 +19,12 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://andersonxe.github.io"),
   title: "Anderson Martins · Engenheiro de software",
   description:
-    "Anderson Martins, engenheiro de software. Projetos que resolvem problemas reais: Conformind, Craque a Craque, Karaokê, wave2karaoke, Escandir, Afeto em Cesta e Estimador de Salário Dev.",
+    "Anderson Martins, engenheiro de software. Projetos que resolvem problemas reais: Conformind, Craque a Craque, Karaokê, wave2karaoke, Repertório, pianoPedals, Escandir, Afeto em Cesta e Estimador de Salário Dev.",
   openGraph: {
     url: "/",
     title: "Anderson Martins · Engenheiro de software",
     description:
-      "Anderson Martins, engenheiro de software. Projetos que resolvem problemas reais: Conformind, Craque a Craque, Karaokê, wave2karaoke, Escandir, Afeto em Cesta e Estimador de Salário Dev.",
+      "Anderson Martins, engenheiro de software. Projetos que resolvem problemas reais: Conformind, Craque a Craque, Karaokê, wave2karaoke, Repertório, pianoPedals, Escandir, Afeto em Cesta e Estimador de Salário Dev.",
     type: "website",
     locale: "pt_BR",
   },
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Anderson Martins · Engenheiro de software",
     description:
-      "Anderson Martins, engenheiro de software. Projetos que resolvem problemas reais: Conformind, Craque a Craque, Karaokê, wave2karaoke, Escandir, Afeto em Cesta e Estimador de Salário Dev.",
+      "Anderson Martins, engenheiro de software. Projetos que resolvem problemas reais: Conformind, Craque a Craque, Karaokê, wave2karaoke, Repertório, pianoPedals, Escandir, Afeto em Cesta e Estimador de Salário Dev.",
   },
   robots: { index: true, follow: true },
 };
