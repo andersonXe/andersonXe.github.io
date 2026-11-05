@@ -1,5 +1,11 @@
 export type ProjectStatus = "no ar" | "em desenvolvimento" | "em uso";
 
+export type ProjectImage = {
+  src: string; // screenshot in public/projects (16:10 WebP, ~1600px wide)
+  alt: string; // what the screen shows
+  note?: string; // caveat shown under it (e.g. illustration, local preview)
+};
+
 export type Project = {
   slug: string;
   name: string;
@@ -9,8 +15,7 @@ export type Project = {
   problem: string; // what it solves and for whom, in one or two sentences
   highlights: string[]; // what makes it different, not how it was built
   live?: string;
-  image?: string; // screenshot in public/projects
-  imageNote?: string; // caveat shown on the screenshot (e.g. local preview)
+  images: ProjectImage[]; // carousel; the first one is the cover
   repo?: string; // only public repos; private ones would 404 for visitors
 };
 
@@ -32,7 +37,11 @@ export const projects: Project[] = [
       "Mede se a ação resolveu de fato e sugere soluções que já funcionaram antes",
     ],
     live: "https://conformind.onrender.com/",
-    image: "/projects/conformind.webp",
+    images: [
+      { src: "/projects/conformind.webp", alt: "Página inicial" },
+      { src: "/projects/conformind-cpk.webp", alt: "Calculadora de Cp e Cpk" },
+      { src: "/projects/conformind-amostragem.webp", alt: "Calculadora de amostragem NBR 5426" },
+    ],
   },
   {
     slug: "craque-a-craque",
@@ -48,7 +57,10 @@ export const projects: Project[] = [
       "Feito para aguentar picos de acesso sem cair e sem que o custo do servidor cresça junto",
     ],
     live: "https://craqueacraque.xyz",
-    image: "/projects/craque.webp",
+    images: [
+      { src: "/projects/craque.webp", alt: "Desafios do dia" },
+      { src: "/projects/craque-jogo.webp", alt: "Partida em andamento, ligando dois jogadores por um clube" },
+    ],
   },
   {
     slug: "karaoke",
@@ -65,7 +77,10 @@ export const projects: Project[] = [
       "Toca vídeos do YouTube e músicas com letra sincronizada, inclusive as geradas pelo wave2karaoke",
     ],
     live: "https://karaoke-cqt9.onrender.com/",
-    image: "/projects/karaoke.webp",
+    images: [
+      { src: "/projects/karaoke.webp", alt: "Pedido de música no palco" },
+      { src: "/projects/karaoke-palco.webp", alt: "Palco com o QR code para os convidados entrarem" },
+    ],
   },
   {
     slug: "wave2karaoke",
@@ -81,8 +96,7 @@ export const projects: Project[] = [
       "Leva a letra da gravação original para vídeos de karaokê, mesmo quando estão em outro tom ou andamento",
       "O arquivo gerado serve para o Karaokê e para qualquer jogo compatível com UltraStar",
     ],
-    image: "/projects/wave2karaoke.webp",
-    imageNote: "Ilustração",
+    images: [{ src: "/projects/wave2karaoke.webp", alt: "Da gravação ao arquivo de karaokê", note: "Ilustração" }],
   },
   {
     slug: "repertorio",
@@ -98,7 +112,11 @@ export const projects: Project[] = [
       "Cada evento tem presença confirmada, repertório e chat; músicos convidados veem só aquele show",
       "Dá para baixar o repertório antes e tocar no palco sem internet",
     ],
-    image: "/projects/repertorio.webp",
+    images: [
+      { src: "/projects/repertorio-agenda.webp", alt: "Agenda da banda" },
+      { src: "/projects/repertorio-repertorio.webp", alt: "Repertório de um show em blocos" },
+      { src: "/projects/repertorio-palco.webp", alt: "Modo palco" },
+    ],
   },
   {
     slug: "pianopedals",
@@ -113,8 +131,13 @@ export const projects: Project[] = [
       "Uma rede neural reconhece quais notas estão soando, para o sostenuto segurar só essas; por enquanto, testada em violão sintético",
       "Processa o áudio mais de 200 vezes mais rápido que o tempo real no PC, pensando em rodar depois dentro de um pedal",
     ],
-    image: "/projects/pianopedals.webp",
-    imageNote: "Espectrograma gerado pelo próprio projeto",
+    images: [
+      {
+        src: "/projects/pianopedals.webp",
+        alt: "Espectrograma sem e com o pedal",
+        note: "Espectrograma gerado pelo próprio projeto",
+      },
+    ],
   },
   {
     slug: "escandir",
@@ -130,7 +153,10 @@ export const projects: Project[] = [
       "A IA propõe variações, o poeta decide e o sistema confere se a proposta cabe na métrica",
     ],
     live: "https://andersonxe.github.io/escandir/",
-    image: "/projects/escandir.webp",
+    images: [
+      { src: "/projects/escandir.webp", alt: "Soneto escandido no tema claro" },
+      { src: "/projects/escandir-escuro.webp", alt: "O mesmo poema no tema escuro" },
+    ],
     repo: `${GH}/escandir`,
   },
   {
@@ -146,8 +172,7 @@ export const projects: Project[] = [
       "Itens personalizados com mensagem e foto",
       "Confere o CEP e os horários disponíveis antes da compra, para não prometer uma entrega que não pode cumprir",
     ],
-    image: "/projects/afeto-em-cesta.webp",
-    imageNote: "Prévia local · fotos ilustrativas",
+    images: [{ src: "/projects/afeto-em-cesta.webp", alt: "Loja", note: "Prévia local · fotos ilustrativas" }],
   },
   {
     slug: "estimador-salario",
@@ -163,7 +188,11 @@ export const projects: Project[] = [
       "Diz com clareza o que os dados não conseguem responder",
     ],
     live: "https://andersonxe.github.io/estimador-salario/",
-    image: "/projects/estimador.webp",
+    images: [
+      { src: "/projects/estimador.webp", alt: "Estimativa sem filtros" },
+      { src: "/projects/estimador-perfil.webp", alt: "Estimativa para um perfil preenchido" },
+      { src: "/projects/estimador-detalhes.webp", alt: "Como a estimativa foi calculada" },
+    ],
     repo: `${GH}/estimador-salario`,
   },
 ];

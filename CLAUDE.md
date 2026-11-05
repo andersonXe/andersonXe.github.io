@@ -27,7 +27,7 @@ npm run lint    # ESLint
 
 All routes live under `app/`. The entry point is `app/page.tsx`. `app/layout.tsx` is the root layout wrapping the entire app.
 
-Projects shown on the page are data in `app/data/projects.ts` — add or edit entries there. Each project shows a screenshot from `public/projects/` (16:10 WebP, ~1600px wide).
+Projects shown on the page are data in `app/data/projects.ts` — add or edit entries there. Each project has an `images` list (screenshots in `public/projects/`, 16:10 WebP, ~1600px wide) shown as a carousel by `app/components/ProjectGallery.tsx`; the first image is the cover.
 
 ## Deployment
 

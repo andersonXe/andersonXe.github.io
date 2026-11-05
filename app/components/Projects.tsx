@@ -1,8 +1,7 @@
-import Image from "next/image";
 import { projects, type Project } from "../data/projects";
+import ProjectGallery from "./ProjectGallery";
 import ProjectMotion from "./ProjectMotion";
 
-const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
 
 function ProjectTitle({ p }: { p: Project }) {
@@ -28,28 +27,7 @@ function ProjectRow({ p, index }: { p: Project; index: number }) {
             <ProjectTitle p={p} />
           </div>
 
-          {p.image && (
-            <figure className="proj-figure" data-reveal>
-              <a
-                href={p.live ?? undefined}
-                target={p.live ? "_blank" : undefined}
-                rel={p.live ? "noopener noreferrer" : undefined}
-                className="proj-img"
-                aria-label={p.live ? `Abrir ${p.name}` : undefined}
-                tabIndex={p.live ? undefined : -1}
-              >
-                <Image
-                  src={`${BASE}${p.image}`}
-                  alt={`Captura de tela do ${p.name}`}
-                  fill
-                  sizes="(max-width: 900px) 100vw, 760px"
-                  style={{ objectFit: "cover", objectPosition: "top center" }}
-                />
-                <span className="proj-edge" aria-hidden="true" />
-              </a>
-              {p.imageNote && <figcaption>{p.imageNote}</figcaption>}
-            </figure>
-          )}
+          {p.images.length > 0 && <ProjectGallery p={p} />}
 
           <div className="proj-body" data-reveal style={d(140)}>
             <div className="proj-title proj-title-side">
@@ -120,7 +98,51 @@ export default function Projects() {
         [data-theme="light"] .proj-img { --edge-light: rgba(229, 72, 15, 0.55); }
         [data-theme="light"] .proj-img { box-shadow: 0 30px 60px -34px rgba(20,24,40,0.35); }
         [data-theme="light"] .proj-img:hover { box-shadow: 0 50px 90px -40px rgba(20,24,40,0.5); }
-        .proj-figure figcaption { margin-top: 10px; font-size: 12px; color: var(--color-muted); }
+        /* Carousel: slides crossfade in place, with the same blur dissolve as the project swap */
+        .proj-shots { position: absolute; inset: 0; display: block; }
+        .proj-slide {
+          opacity: 0; filter: blur(8px); transform: scale(1.03);
+          transition: opacity 700ms var(--ease), filter 700ms var(--ease), transform 900ms var(--ease);
+        }
+        .proj-slide[data-on] { opacity: 1; filter: none; transform: none; }
+        .proj-nav {
+          position: absolute; top: 50%; translate: 0 -50%; z-index: 2;
+          width: 38px; height: 38px; display: grid; place-items: center; cursor: pointer;
+          border: 1px solid rgba(255,255,255,0.14); border-radius: 50%;
+          background: rgba(12,12,14,0.55); color: #f2f2f3;
+          -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+          opacity: 0; transition: opacity 300ms var(--ease), background 300ms var(--ease), border-color 300ms var(--ease);
+        }
+        .proj-nav svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+        .proj-prev { left: 14px; }
+        .proj-next { right: 14px; }
+        .proj-img:hover .proj-nav, .proj-nav:focus-visible { opacity: 1; }
+        .proj-nav:hover { background: rgba(12,12,14,0.8); border-color: var(--color-accent); }
+        .proj-nav:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+        @media (hover: none) { .proj-nav { display: none; } }
+
+        .proj-figure figcaption {
+          margin-top: 14px; display: flex; align-items: center; gap: 16px; min-height: 16px;
+          font-size: 12px; color: var(--color-muted);
+        }
+        .proj-pips { display: flex; gap: 4px; flex: none; }
+        .proj-pips button {
+          width: 22px; height: 22px; padding: 0; border: 0; background: none; cursor: pointer;
+          display: grid; place-items: center;
+        }
+        .proj-pips button::before {
+          content: ""; width: 7px; height: 7px; background: var(--color-line-2);
+          transition: background 300ms var(--ease), transform 300ms var(--ease), box-shadow 300ms var(--ease);
+        }
+        .proj-pips button:hover::before { background: var(--color-text-2); }
+        .proj-pips button[aria-current="true"]::before {
+          background: var(--color-accent); transform: scale(1.3); box-shadow: 0 0 10px var(--accent-glow);
+        }
+        .proj-pips button:focus-visible { outline: 2px solid var(--color-accent); outline-offset: -2px; }
+        .proj-pips { margin-left: -7px; }
+        @media (prefers-reduced-motion: reduce) {
+          .proj-slide { transition: opacity 200ms linear; filter: none; transform: none; }
+        }
 
         .proj-body { display: flex; flex-direction: column; gap: 14px; }
         .proj-title { display: flex; flex-direction: column; gap: 14px; }
